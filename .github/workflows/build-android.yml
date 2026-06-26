@@ -30,11 +30,10 @@ jobs:
         with:
           version: 9
 
-      # pnpm-workspace.yaml has Replit-specific settings that may cause issues,
-      # so we install only the mobile package deps directly with npm
-      - name: Install mobile dependencies
-        working-directory: artifacts/mobile
-        run: npm install --legacy-peer-deps
+      # Use --no-frozen-lockfile because the lockfile has Replit-specific
+      # platform entries; pnpm still resolves catalog: and workspace: correctly
+      - name: Install dependencies
+        run: pnpm install --no-frozen-lockfile
 
       - name: Make gradlew executable
         run: chmod +x artifacts/mobile/android/gradlew
