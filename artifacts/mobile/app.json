@@ -16,7 +16,15 @@
     "ios": {
       "supportsTablet": false
     },
-    "android": {},
+    "android": {
+      "package": "com.mckalem.app",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/icon.png",
+        "backgroundColor": "#1e2128"
+      },
+      "permissions": []
+    },
     "web": {
       "favicon": "./assets/images/icon.png"
     },

@@ -11,7 +11,7 @@ expo-env.d.ts
 
 # Native
 ios/
-android/
+# android/ — native klasörünü commit ediyoruz (GitHub Actions APK build için)
 *.orig.*
 *.jks
 *.p8
