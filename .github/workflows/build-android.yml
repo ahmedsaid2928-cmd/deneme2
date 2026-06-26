@@ -30,22 +30,20 @@ jobs:
         with:
           version: 9
 
-      - name: Install root dependencies
-        run: pnpm install --frozen-lockfile
-
+      # pnpm-workspace.yaml has Replit-specific settings that may cause issues,
+      # so we install only the mobile package deps directly with npm
       - name: Install mobile dependencies
-        run: pnpm --filter @workspace/mobile install
+        working-directory: artifacts/mobile
+        run: npm install --legacy-peer-deps
 
       - name: Make gradlew executable
         run: chmod +x artifacts/mobile/android/gradlew
 
       - name: Build debug APK
         working-directory: artifacts/mobile/android
-        env:
-          ANDROID_SDK_ROOT: ${{ env.ANDROID_SDK_ROOT }}
-        run: ./gradlew assembleDebug --no-daemon --stacktrace
+        run: ./gradlew assembleDebug --no-daemon --stacktrace 2>&1
 
-      - name: Upload APK artifact
+      - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: mc-kalem-debug.apk
